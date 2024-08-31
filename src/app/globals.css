@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.react-calendar {
+    border: none !important;
+    width: 100% !important;
+    font-family: Inter !important;
+}
+
+.react-calendar__tile--active {
+    background: rgb(60, 49, 211) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: .25rem;
+}

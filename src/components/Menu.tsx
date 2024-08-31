@@ -1,3 +1,4 @@
+import { role } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -119,34 +120,33 @@ const menuItems = [
 const Menu = () => {
   return (
     <div className="flex flex-col gap-6 text-sm m-t-4">
-      {menuItems.map((i) => {
-        return (
-          <>
-            <div key={i.title}>
-              <span className="hidden lg:block text-gray-400 m-y-4">
-                {i.title}
-              </span>
-            </div>
-            <ul className="flex flex-col gap-1">
-              {i.items.map((navItem) => (
-                <Link
-                  key={navItem.label}
-                  href={navItem.href}
-                  className="w-full flex flex-row gap-4 justify-center lg:justify-start items-center py-2 px-2 rounded-md text-gray-500 hover:bg-blue-100"
-                >
-                  <Image
-                    src={navItem.icon}
-                    alt="lable"
-                    width={20}
-                    height={20}
-                  />
-                  <span className="hidden lg:block">{navItem.label}</span>
-                </Link>
-              ))}
-            </ul>
-          </>
-        );
-      })}
+      {menuItems.map((i) => (
+        <div key={i.title}>
+          <span className="hidden lg:block text-gray-400 m-y-4">{i.title}</span>
+          <ul className="flex flex-col gap-1">
+            {i.items.map((navItem) => {
+              if (navItem.visible.includes(role)) {
+                return (
+                  <Link
+                    key={navItem.label}
+                    href={navItem.href}
+                    className="w-full flex flex-row gap-4 justify-center lg:justify-start items-center py-2 px-2 rounded-md text-gray-500 hover:bg-blue-100"
+                  >
+                    <Image
+                      src={navItem.icon}
+                      alt={navItem.label}
+                      width={20}
+                      height={20}
+                    />
+                    <span className="hidden lg:block">{navItem.label}</span>
+                  </Link>
+                );
+              }
+              return null;
+            })}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
